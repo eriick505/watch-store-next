@@ -8,7 +8,12 @@ module.exports = {
     '^.+\\.(js|jsx|ts|tsx)$': ['babel-jest', { presets: ['next/babel'] }],
   },
   transformIgnorePatterns: ['/node_modules/', '^.+\\.module\\.(css|sass|scss)$'],
-  collectCoverageFrom: ['**/*.{js,jsx,ts,tsx}', '!**/*.d.ts', '!**/node_modules/**'],
+  collectCoverageFrom: [
+    '<rootDir>/components/**/*.js',
+    '<rootDir>/pages/**/*.js',
+    '<rootDir>/hooks/**/*.js',
+    '<rootDir>/store/**/*.js',
+  ],
   moduleNameMapper: {
     /* Handle CSS imports (with CSS modules)
     https://jestjs.io/docs/webpack#mocking-css-modules */
