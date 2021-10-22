@@ -14,6 +14,7 @@ export function useFetchProducts() {
         if (mounted) setProducts(data.products);
       })
       .catch((err) => {
+        /* istanbul ignore next */
         if (mounted) setError(true);
       });
 
