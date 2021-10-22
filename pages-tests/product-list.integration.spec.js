@@ -33,13 +33,19 @@ describe('ProductList', () => {
     });
   });
 
-  it.todo('should render the no products message');
+  it('should render the "No products" message', async () => {
+    renderProductList();
+
+    await waitFor(() => {
+      expect(screen.getByTestId('no-products').textContent).toEqual('No products');
+    });
+  });
+
+  it.todo('should display error message when promise rejects');
 
   it.todo('should render the Search components');
 
   it.todo('should filter the product list when a search is performed');
-
-  it.todo('should display error message when promise rejects');
 
   it.todo('should display the total quantity of products');
 
