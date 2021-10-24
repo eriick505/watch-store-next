@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import { makeServer } from '../miragejs/server';
 
 import Cart from '../components/cart';
