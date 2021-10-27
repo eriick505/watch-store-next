@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useFetchProducts } from '../hooks/useFetchProducts';
+import { useCartStore } from '../store/cart';
 
 import Search from '../components/Search';
 import ProductCard from '../components/ProductCard';
@@ -9,6 +10,7 @@ export default function Home() {
   const [localProducts, setLocalProducts] = useState([]);
 
   const { products, error } = useFetchProducts();
+  const addTocart = useCartStore((store) => store.actions.addProduct);
 
   useEffect(() => {
     if (term === '') return setLocalProducts(products);
@@ -37,7 +39,9 @@ export default function Home() {
 
     if (isNoTContainsProduct) return <h4 data-testid="no-products">No products</h4>;
 
-    return localProducts.map((prod) => <ProductCard key={prod.id} product={prod} />);
+    return localProducts.map((prod) => (
+      <ProductCard key={prod.id} product={prod} addToCart={addTocart} />
+    ));
   };
 
   return (
