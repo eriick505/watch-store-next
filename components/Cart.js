@@ -2,18 +2,23 @@ import CartItem from './CartItem';
 import { useCartStore } from '../store/cart';
 
 export default function Cart() {
-  const open = useCartStore(({ state }) => state.open);
+  const { open, products } = useCartStore(({ state }) => state);
   const toggleCart = useCartStore(({ actions }) => actions.toggle);
 
   return (
     <div
+      data-testid="cart"
       className={`${
         open ? '' : 'hidden'
       } fixed right-0 top-0 max-w-xs w-full h-full px-6 py-4 transition duration-300 transform overflow-y-auto bg-white border-l-2 border-gray-300 z-50`}
     >
       <div className="flex items-center justify-between">
         <h3 className="text-2xl font-medium text-gray-700">Your cart</h3>
-        <button onClick={toggleCart} className="text-gray-600 focus:outline-none">
+        <button
+          data-testid="close-button"
+          onClick={toggleCart}
+          className="text-gray-600 focus:outline-none"
+        >
           <svg
             className="h-5 w-5"
             fill="none"
@@ -28,7 +33,9 @@ export default function Cart() {
         </button>
       </div>
       <hr className="my-3" />
-      <CartItem product={{}} />
+      {products.map((product) => (
+        <CartItem key={product.id} product={product} />
+      ))}
       <div className="mt-8">
         <form className="flex items-center justify-center">
           <input className="form-input w-48" type="text" placeholder="Add promocode" />
